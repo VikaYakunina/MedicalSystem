@@ -1,0 +1,72 @@
+CREATE DATABASE "TP"
+CREATE TABLE public.container
+(
+id integer NOT NULL DEFAULT nextval('container_id_seq'::regclass),
+product_id integer,
+movemeny_type character varying(80) COLLATE pg_catalog."default",
+count integer,
+CONSTRAINT container_pkey PRIMARY KEY (id),
+CONSTRAINT container_product_id_fkey FOREIGN KEY (product_id)
+REFERENCES public.product (id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION
+)
+CREATE TABLE public.department
+(
+id integer NOT NULL DEFAULT nextval('department_id_seq'::regclass),
+name character varying(80) COLLATE pg_catalog."default",
+adress character varying(80) COLLATE pg_catalog."default",
+"number" character varying(80) COLLATE pg_catalog."default",
+nurse_id integer,
+department_head_id integer,
+CONSTRAINT department_pkey PRIMARY KEY (id),
+CONSTRAINT department_department_head_id_fkey FOREIGN KEY (department_head_id)
+REFERENCES public.department_head (id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION,
+CONSTRAINT department_nurse_id_fkey FOREIGN KEY (nurse_id)
+REFERENCES public.nurse (id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION
+)
+CREATE TABLE public.department_head
+(
+id integer NOT NULL DEFAULT nextval('department_head_id_seq'::regclass),
+name character varying(80) COLLATE pg_catalog."default",
+login character varying(80) COLLATE pg_catalog."default",
+password character varying(80) COLLATE pg_catalog."default",
+CONSTRAINT department_head_pkey PRIMARY KEY (id)
+)
+CREATE TABLE public.nurse
+(
+id integer NOT NULL DEFAULT nextval('nurse_id_seq'::regclass),
+name character varying(80) COLLATE pg_catalog."default",
+login character varying(80) COLLATE pg_catalog."default",
+password character varying(80) COLLATE pg_catalog."default",
+CONSTRAINT nurse_pkey PRIMARY KEY (id)
+)
+CREATE TABLE public.product
+(
+id integer NOT NULL DEFAULT nextval('product_id_seq'::regclass),
+name character varying(80) COLLATE pg_catalog."default",
+type character varying(80) COLLATE pg_catalog."default",
+code integer,
+CONSTRAINT product_pkey PRIMARY KEY (id)
+)
+CREATE TABLE public.waybill
+(
+id integer NOT NULL DEFAULT nextval('waybill_id_seq'::regclass),
+"number" integer,
+date timestamp without time zone,
+product_id integer,
+department_id integer,
+CONSTRAINT waybill_pkey PRIMARY KEY (id),
+CONSTRAINT waybill_department_id_fkey FOREIGN KEY (department_id)
+REFERENCES public.department (id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION,
+CONSTRAINT waybill_product_id_fkey FOREIGN KEY (product_id)
+REFERENCES public.product (id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION
+) 

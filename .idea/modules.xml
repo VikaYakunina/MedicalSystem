@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Pharmacy.iml" filepath="$PROJECT_DIR$/.idea/Pharmacy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dev_auth_vue/filmrest/filmrest.iml" filepath="$PROJECT_DIR$/dev_auth_vue/filmrest/filmrest.iml" />
+    </modules>
+  </component>
+</project>
